@@ -5,7 +5,12 @@ import time
 
 class TestWebpageString(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument(f'--user-data-dir=/tmp/chrome-user-data-{time.time()}')
+        self.driver = webdriver.Chrome(options=options)
         self.driver.get("http://localhost:8000/")
         time.sleep(2)  # Wait for page to load
 
